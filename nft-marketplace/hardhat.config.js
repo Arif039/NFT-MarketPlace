@@ -10,7 +10,7 @@ module.exports = {
       chainId: 1337
     },
     mainnet: {
-      url:"rps url",
+      url:"rpc url",
       accounts: [privateKey],
     },
 
