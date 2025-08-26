@@ -44,5 +44,27 @@ export const NFTprovider = ({ Children }) => {
             console.log("error connecting wallet", error);
             setIsLoading(false);
         }
-    }
+    };
+
+    useEffect (() => {
+        checkIfWalletIsConnected();
+
+        const handleAccountChange = (accounts) => {
+            if (accounts.length > 0) {
+                setCurrentAccount (accounts[0]);
+            } else {
+                setCurrentAccount ("");
+            }
+        };
+
+        if (window.ethereum) {
+            window.ethereum.on ("accountsChanged", handleAccountChange);
+        }
+
+        return () => {
+            if (window.ethereum) {
+                window.ethereum.removeListener ("accountsChanged", handleAccountChange);
+            }
+        }
+    }, []);
 };
