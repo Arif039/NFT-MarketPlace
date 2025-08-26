@@ -68,3 +68,15 @@ export const NFTprovider = ({ Children }) => {
         }
     }, []);
 };
+
+return (
+    <NFTContext.Provider
+        value={{
+            currentAccount,
+            connectWallet,
+            isLoading,
+        }}
+    >
+        {Children}
+    </NFTContext.Provider>
+);
