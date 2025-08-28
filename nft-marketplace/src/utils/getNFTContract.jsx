@@ -27,5 +27,5 @@ export function getNFTContract (needSigner = false) {
 
 export function getMarketContract (needSigner = false) {
     const providerOrSigner = getProviderOrSigner(needSigner);
-    return new ethers.Contract(nftAddress, nftABI, providerOrSigner);
+    return new ethers.Contract(nftMarketAddress, marketplaceABI, providerOrSigner);
 }
