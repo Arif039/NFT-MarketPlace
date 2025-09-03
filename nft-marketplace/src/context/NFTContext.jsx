@@ -1,7 +1,7 @@
 import React, { Children, createContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
-import Web3Modal form "web3Modal";
-import { getMarketContract, getNFTContract } from "@/utils/getNFTContract";
+import Web3Modal from "web3modal";
+import { getMarketContract, getNFTContract } from "../utils/getNFTContract";
 
 export const NFTContext = createContext();
 
