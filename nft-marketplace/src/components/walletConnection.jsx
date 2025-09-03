@@ -17,9 +17,17 @@ export default function walletConnection () {
     async function checkConnection() {
         if (window.ethereum) {
             const accounts  = await window.ethereum.request ({
-                method: "eth_accounts",
+                 method: "eth_accounts",
             });
+
+            if (accounts.length) {
+                setConnected(true);
+                setAccount(account[0]);
+            }
+
         }
+
+        
     }
 
     function handleAccountChange (accounts) {
