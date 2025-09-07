@@ -4,7 +4,7 @@ import axios from "axios";
 import NFTCard from "@/components/NFTCard";
 import { getMarketContract, getNFTContract } from "@/utils/getNFTContract";
 
-export default function Home () {
+export default function NFTHome () {
     const [nfts, setNfts] = useState([]);
     const [loadingState, setLoadingState] = useState("Not-loaded");
 
@@ -40,5 +40,46 @@ export default function Home () {
             console.error("error loading NFTs: ", error);
             setLoadingState("error");   
         }
+    }
+
+    async function buyNft(nft) {
+        try {
+            const marketContract = getMarketContract (true);
+            const price = nft.price;
+
+            const transaction = await marketContract.createMarketSale(nft.tokenId, {
+                value: price,
+            });
+
+            await transaction.wait();
+            loadNFTs();
+
+        } catch (error) {
+            console.error("Error buyinf NFT ", error);    
+        }
+    }
+
+    if (loadingState === "loading") {
+        return (
+            <div className="flex justify-center items-center h-64">
+                <p className="text-xl">
+                    Loading NFTs...
+                </p>
+            </div>
+        )
+    }
+
+    if (loadingState === 'loaded' && !nfts.length) {
+        return (
+            <div className="flex flex-col justify-center items-center h-64">
+                <h1 className="text-3xl font-bold mb-4s">
+                    No items in marketplace
+                </h1>
+                <p>
+                    Be the first to mint
+                </p>
+                
+            </div>
+        )
     }
 }
